@@ -1,0 +1,6 @@
+# Config mínima para a Supabase CLI.
+# project_id é o "ref" do projeto remoto (backstage).
+project_id = "fetrngpniecxwdmjgwkv"
+
+[db]
+major_version = 17

@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: #fafafa;
+  color: #18181b;
+  font-family: var(--font-sans);
+}
+
+/* Some inputs herdam melhor o tema claro */
+input,
+textarea,
+select,
+button {
+  color-scheme: light;
+}
