@@ -30,3 +30,7 @@ supabase/.temp/
 .idea/
 .vscode/
 npm-debug.log*
+
+# Claude Code dev server
+.claude/*
+!.claude/launch.json
