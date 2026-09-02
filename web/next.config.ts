@@ -8,10 +8,10 @@ import type { NextConfig } from "next";
  */
 const SUPABASE_URL =
   process.env.NEXT_PUBLIC_SUPABASE_URL ??
-  "https://fetrngpniecxwdmjgwkv.supabase.co";
+  "https://pmvhvzibfsdjjhayhymr.supabase.co";
 const SUPABASE_ANON_KEY =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
-  "sb_publishable_m2k9czgxUN9Omemk4bL3lg_tG_GJsvo";
+  "sb_publishable_Ap2SYSw-Qm3KJ_PZJVj_vA_eE4J_dy2";
 
 const nextConfig: NextConfig = {
   env: {

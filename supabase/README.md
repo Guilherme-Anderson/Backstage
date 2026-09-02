@@ -1,23 +1,17 @@
 # Supabase — projeto `backstage`
 
-- **Project ref:** `fetrngpniecxwdmjgwkv`
+- **Project ref:** `pmvhvzibfsdjjhayhymr`
 - **Região:** `sa-east-1`
-- **URL:** `https://fetrngpniecxwdmjgwkv.supabase.co`
+- **URL:** `https://pmvhvzibfsdjjhayhymr.supabase.co`
 
 ## Migrations
 
-As migrations em `migrations/` **já foram aplicadas** ao projeto remoto (via MCP,
-em 2026-09-01). Elas estão aqui para versionamento e para recriar o banco do zero.
-
-Para trabalhar com a CLI localmente:
+As 6 migrations em `migrations/` montam o banco do zero. Aplicar no projeto remoto:
 
 ```bash
-npm i -g supabase
-supabase login
-supabase link --project-ref fetrngpniecxwdmjgwkv
-supabase db pull            # confere que o remoto bate com migrations/
-# ou, num projeto novo:
-supabase db push
+npx supabase login
+npx supabase link --project-ref pmvhvzibfsdjjhayhymr   # pede a senha do banco
+npx supabase db push                                   # aplica as 6 migrations + seed
 ```
 
 Ordem das migrations:

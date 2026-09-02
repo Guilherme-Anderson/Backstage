@@ -25,7 +25,7 @@ automáticos (`pg_cron` + Edge Functions). O schema já contempla tudo
 
 ```
 web/        Next.js 16 (App Router) + TypeScript + Tailwind → Vercel
-supabase/   migrations SQL (já aplicadas ao projeto remoto) + config
+supabase/   migrations SQL + config da Supabase CLI
 bot/        (leva 2) processo Baileys → Railway
 ```
 
@@ -42,7 +42,7 @@ npm run dev
 
 | Variável | Valor |
 |---|---|
-| `NEXT_PUBLIC_SUPABASE_URL` | `https://fetrngpniecxwdmjgwkv.supabase.co` |
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://pmvhvzibfsdjjhayhymr.supabase.co` |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | chave *publishable* (`sb_publishable_…`) |
 | `NEXT_PUBLIC_APP_URL` | `http://localhost:3000` (prod: a URL da Vercel) |
 
