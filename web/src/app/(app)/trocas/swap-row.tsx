@@ -26,10 +26,10 @@ export function SwapRow({
   return (
     <li className="flex flex-wrap items-center justify-between gap-3 px-5 py-3">
       <div>
-        <div className="font-medium text-zinc-900">
+        <div className="font-medium text-fg">
           {person} · {role}
         </div>
-        <div className="text-sm text-zinc-500">
+        <div className="text-sm text-fg-muted">
           {eventTitle} — {eventDate}
           {reason ? ` · “${reason}”` : ""}
         </div>

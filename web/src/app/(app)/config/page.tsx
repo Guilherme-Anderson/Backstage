@@ -23,28 +23,27 @@ export default async function ConfigPage() {
   await requireAdmin();
   const supabase = await createClient();
 
-  const { data: accessUsers } = await supabase
-    .from("users")
-    .select("id, full_name, email, role, auth_user_id, active")
-    .in("role", ["admin_geral", "coordenador"])
-    .order("role", { ascending: true })
-    .order("full_name", { ascending: true });
-
-  const { data: targets } = await supabase
-    .from("whatsapp_targets")
-    .select("id, kind, label, chat_id, active, teams(name)")
-    .order("kind", { ascending: true });
-
-  const { data: settings } = await supabase
-    .from("app_settings")
-    .select("key, value");
+  const [{ data: accessUsers }, { data: targets }, { data: settings }] =
+    await Promise.all([
+      supabase
+        .from("users")
+        .select("id, full_name, email, role, auth_user_id, active")
+        .in("role", ["admin_geral", "coordenador"])
+        .order("role", { ascending: true })
+        .order("full_name", { ascending: true }),
+      supabase
+        .from("whatsapp_targets")
+        .select("id, kind, label, chat_id, active, teams(name)")
+        .order("kind", { ascending: true }),
+      supabase.from("app_settings").select("key, value"),
+    ]);
   const s = (settings ?? []) as SettingRow[];
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-900">Configurações</h1>
-        <p className="text-sm text-zinc-500">Somente administradores.</p>
+        <h1 className="text-xl font-semibold text-fg">Configurações</h1>
+        <p className="text-sm text-fg-muted">Somente administradores.</p>
       </div>
 
       <Card>
@@ -55,14 +54,14 @@ export default async function ConfigPage() {
         {!accessUsers || accessUsers.length === 0 ? (
           <EmptyState>Nenhum acesso cadastrado.</EmptyState>
         ) : (
-          <ul className="divide-y divide-zinc-100">
+          <ul className="divide-y divide-border-soft">
             {accessUsers.map((u) => (
               <li
                 key={u.id}
                 className="flex items-center justify-between gap-3 px-5 py-3"
               >
                 <div>
-                  <div className="font-medium text-zinc-900">
+                  <div className="font-medium text-fg">
                     {u.full_name}
                     <Badge
                       tone={u.role === "admin_geral" ? "sky" : "neutral"}
@@ -71,7 +70,7 @@ export default async function ConfigPage() {
                       {ROLE_LABEL[u.role]}
                     </Badge>
                   </div>
-                  <div className="text-sm text-zinc-500">{u.email}</div>
+                  <div className="text-sm text-fg-muted">{u.email}</div>
                 </div>
                 <Badge tone={u.auth_user_id ? "green" : "amber"}>
                   {u.auth_user_id ? "Ativo" : "Aguardando 1º acesso"}
@@ -80,7 +79,7 @@ export default async function ConfigPage() {
             ))}
           </ul>
         )}
-        <div className="border-t border-zinc-100 p-5">
+        <div className="border-t border-border-soft p-5">
           <AddAccessForm />
         </div>
       </Card>
@@ -90,7 +89,7 @@ export default async function ConfigPage() {
           title="Grupos de WhatsApp"
           description="O ID do grupo é usado pelo bot (leva 2). Preencha quando o bot estiver pareado."
         />
-        <div className="divide-y divide-zinc-100">
+        <div className="divide-y divide-border-soft">
           {(targets ?? []).map((t) => (
             <div key={t.id} className="px-5 py-4">
               <WhatsAppTargetForm
@@ -111,7 +110,7 @@ export default async function ConfigPage() {
       </Card>
 
       <Card className="p-5">
-        <h2 className="mb-3 text-base font-semibold text-zinc-900">
+        <h2 className="mb-3 text-base font-semibold text-fg">
           Configurações gerais
         </h2>
         <GeneralSettingsForm

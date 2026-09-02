@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { APP_NAME } from "@/lib/constants";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type NavItem = { href: string; label: string; adminOnly?: boolean };
 
@@ -31,11 +32,11 @@ export function AppShell({
   const items = NAV.filter((i) => !i.adminOnly || isAdmin);
 
   return (
-    <div className="min-h-screen bg-zinc-50">
-      <header className="border-b border-zinc-200 bg-white">
+    <div className="min-h-screen bg-surface-2">
+      <header className="border-b border-border bg-surface">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4">
           <div className="flex items-center gap-6">
-            <Link href="/painel" className="font-bold tracking-tight text-zinc-900">
+            <Link href="/painel" className="font-bold tracking-tight text-fg">
               {APP_NAME}
             </Link>
             <nav className="hidden gap-1 md:flex">
@@ -49,8 +50,8 @@ export function AppShell({
                     className={cn(
                       "rounded-md px-3 py-1.5 text-sm font-medium",
                       active
-                        ? "bg-sky-50 text-sky-700"
-                        : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900",
+                        ? "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-300"
+                        : "text-fg-muted hover:bg-surface-2 hover:text-fg",
                     )}
                   >
                     {item.label}
@@ -60,16 +61,17 @@ export function AppShell({
             </nav>
           </div>
           <div className="flex items-center gap-3">
-            <span className="hidden text-sm text-zinc-500 sm:inline">
+            <span className="hidden text-sm text-fg-muted sm:inline">
               {userName}
             </span>
+            <ThemeToggle />
             <form action="/auth/sair" method="post">
-              <button className="text-sm text-zinc-500 hover:text-zinc-900">
+              <button className="text-sm text-fg-muted hover:text-fg">
                 Sair
               </button>
             </form>
             <button
-              className="rounded-md p-1.5 text-zinc-600 hover:bg-zinc-100 md:hidden"
+              className="rounded-md p-1.5 text-fg-muted hover:bg-surface-2 md:hidden"
               onClick={() => setOpen((v) => !v)}
               aria-label="Menu"
             >
@@ -85,13 +87,13 @@ export function AppShell({
           </div>
         </div>
         {open ? (
-          <nav className="flex flex-col gap-1 border-t border-zinc-100 px-4 py-2 md:hidden">
+          <nav className="flex flex-col gap-1 border-t border-border-soft px-4 py-2 md:hidden">
             {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100"
+                className="rounded-md px-3 py-2 text-sm font-medium text-fg hover:bg-surface-2"
               >
                 {item.label}
               </Link>

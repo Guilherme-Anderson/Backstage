@@ -30,8 +30,8 @@ export default async function AvailabilityPublicPage({
   if (!payload) {
     return (
       <Card className="p-6 text-center">
-        <h1 className="text-lg font-semibold text-zinc-900">Link inválido</h1>
-        <p className="mt-2 text-sm text-zinc-600">
+        <h1 className="text-lg font-semibold text-fg">Link inválido</h1>
+        <p className="mt-2 text-sm text-fg-muted">
           Confira o link com o seu coordenador.
         </p>
       </Card>
@@ -42,19 +42,19 @@ export default async function AvailabilityPublicPage({
 
   return (
     <Card className="p-6">
-      <h1 className="text-lg font-semibold text-zinc-900">
+      <h1 className="text-lg font-semibold text-fg">
         Disponibilidade — {monthLabel(payload.cycle.year, payload.cycle.month)}
       </h1>
-      <p className="mt-1 text-sm text-zinc-600">
+      <p className="mt-1 text-sm text-fg-muted">
         {payload.person.full_name} · equipe {payload.team.name}
       </p>
 
       {!open ? (
-        <p className="mt-4 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+        <p className="mt-4 rounded-lg bg-amber-50 dark:bg-amber-500/10 px-3 py-2 text-sm text-amber-800 dark:text-amber-200">
           O período para informar disponibilidade deste mês está encerrado.
         </p>
       ) : (
-        <p className="mt-2 text-sm text-zinc-500">
+        <p className="mt-2 text-sm text-fg-muted">
           Marque os cultos em que você pode servir. Domingo conta manhã e noite
           juntos.
         </p>

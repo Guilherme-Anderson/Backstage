@@ -23,7 +23,7 @@ export function AddAccessForm() {
           </Select>
         </Field>
       </div>
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-fg-muted">
         Coordenador ainda precisa ser vinculado a uma equipe na tela de Equipes.
       </p>
       <FormError>{state?.error}</FormError>

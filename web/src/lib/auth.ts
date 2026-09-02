@@ -17,8 +17,8 @@ export type AppSession = {
 };
 
 /**
- * Carrega a sessão do app para a requisição atual.
- * `null` = ninguém logado.
+ * Carrega a sessão do app para a requisição atual — uma única query além do
+ * getUser(). `null` = ninguém logado.
  */
 export const getAppSession = cache(async (): Promise<AppSession | null> => {
   const supabase = await createClient();
@@ -27,40 +27,44 @@ export const getAppSession = cache(async (): Promise<AppSession | null> => {
   } = await supabase.auth.getUser();
   if (!user) return null;
 
-  const [{ data: hasLogin }, { data: isAdmin }] = await Promise.all([
-    supabase.rpc("has_app_login"),
-    supabase.rpc("is_admin"),
-  ]);
-
-  let profile: Profile | null = null;
-  let coordinatorTeamIds: string[] = [];
-
-  if (hasLogin) {
-    const { data: prof } = await supabase
-      .from("users")
-      .select("*")
-      .eq("auth_user_id", user.id)
-      .maybeSingle();
-    profile = prof ?? null;
-
-    if (profile) {
-      const { data: memberships } = await supabase
-        .from("team_members")
-        .select("team_id")
-        .eq("user_id", profile.id)
-        .eq("is_coordinator", true)
-        .eq("active", true);
-      coordinatorTeamIds = (memberships ?? []).map((m) => m.team_id);
-    }
-  }
-
-  return {
+  const base = {
     authUserId: user.id,
     email: user.email ?? null,
+  };
+
+  // Uma query: perfil + vínculos de coordenação. Se a pessoa não tem papel de
+  // login, a RLS de `users` bloqueia e `prof` volta null.
+  const { data: prof } = await supabase
+    .from("users")
+    .select("*, team_members(team_id, is_coordinator, active)")
+    .eq("auth_user_id", user.id)
+    .maybeSingle();
+
+  if (!prof) {
+    return {
+      ...base,
+      profile: null,
+      isAdmin: false,
+      hasLogin: false,
+      coordinatorTeamIds: [],
+    };
+  }
+
+  const { team_members: memberships, ...profile } = prof as Profile & {
+    team_members: { team_id: string; is_coordinator: boolean; active: boolean }[];
+  };
+
+  const active = profile.active;
+  return {
+    ...base,
     profile,
-    isAdmin: Boolean(isAdmin),
-    hasLogin: Boolean(hasLogin),
-    coordinatorTeamIds,
+    isAdmin: active && profile.role === "admin_geral",
+    hasLogin:
+      active &&
+      (profile.role === "admin_geral" || profile.role === "coordenador"),
+    coordinatorTeamIds: (memberships ?? [])
+      .filter((m) => m.is_coordinator && m.active)
+      .map((m) => m.team_id),
   };
 });
 

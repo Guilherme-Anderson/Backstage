@@ -38,7 +38,7 @@ export function ConfirmForm({
 
   if (result === "confirmed") {
     return (
-      <p className="mt-4 rounded-lg bg-emerald-50 px-3 py-3 text-sm text-emerald-800">
+      <p className="mt-4 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 px-3 py-3 text-sm text-emerald-800 dark:text-emerald-200">
         Presença confirmada. Obrigado! 🙏 Se algo mudar, você pode voltar aqui.
       </p>
     );
@@ -46,7 +46,7 @@ export function ConfirmForm({
   if (result === "declined") {
     return (
       <div className="mt-4 space-y-3">
-        <p className="rounded-lg bg-amber-50 px-3 py-3 text-sm text-amber-800">
+        <p className="rounded-lg bg-amber-50 dark:bg-amber-500/10 px-3 py-3 text-sm text-amber-800 dark:text-amber-200">
           Anotado que você não poderá. O coordenador foi avisado para achar um
           substituto.
         </p>
@@ -60,7 +60,7 @@ export function ConfirmForm({
   return (
     <div className="mt-4 space-y-3">
       {error ? (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p className="rounded-lg bg-red-50 dark:bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-300">
           {error}
         </p>
       ) : null}

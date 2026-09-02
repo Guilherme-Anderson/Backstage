@@ -22,20 +22,20 @@ export function WhatsAppTargetForm({
   );
   return (
     <form action={action} className="flex flex-wrap items-end gap-3">
-      <div className="w-28 shrink-0 pb-2 text-xs font-medium uppercase text-zinc-400">
+      <div className="w-28 shrink-0 pb-2 text-xs font-medium uppercase text-fg-soft">
         {target.hint}
       </div>
       <div className="min-w-[160px] flex-1">
-        <label className="mb-1 block text-xs text-zinc-500">Rótulo</label>
+        <label className="mb-1 block text-xs text-fg-muted">Rótulo</label>
         <Input name="label" defaultValue={target.label} />
       </div>
       <div className="min-w-[200px] flex-1">
-        <label className="mb-1 block text-xs text-zinc-500">
+        <label className="mb-1 block text-xs text-fg-muted">
           ID do grupo (…@g.us)
         </label>
         <Input name="chat_id" defaultValue={target.chat_id ?? ""} />
       </div>
-      <label className="flex items-center gap-2 pb-2 text-sm text-zinc-700">
+      <label className="flex items-center gap-2 pb-2 text-sm text-fg">
         <input type="checkbox" name="active" defaultChecked={target.active} />
         Ativo
       </label>

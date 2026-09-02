@@ -43,12 +43,12 @@ export default function RedefinirSenhaPage() {
 
   return (
     <Card className="p-6">
-      <h1 className="mb-1 text-lg font-semibold text-zinc-900">Nova senha</h1>
+      <h1 className="mb-1 text-lg font-semibold text-fg">Nova senha</h1>
       {!ready ? (
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-fg-muted">
           Abra esta página pelo link enviado no seu e-mail. Se já abriu e continua
           vendo isto, o link pode ter expirado —{" "}
-          <Link href="/esqueci-senha" className="text-sky-600 hover:underline">
+          <Link href="/esqueci-senha" className="text-sky-600 dark:text-sky-400 hover:underline">
             peça um novo
           </Link>
           .

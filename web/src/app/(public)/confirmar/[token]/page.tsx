@@ -27,8 +27,8 @@ export default async function ConfirmPublicPage({
   if (!info) {
     return (
       <Card className="p-6 text-center">
-        <h1 className="text-lg font-semibold text-zinc-900">Link inválido</h1>
-        <p className="mt-2 text-sm text-zinc-600">
+        <h1 className="text-lg font-semibold text-fg">Link inválido</h1>
+        <p className="mt-2 text-sm text-fg-muted">
           Fale com o seu coordenador.
         </p>
       </Card>
@@ -37,16 +37,16 @@ export default async function ConfirmPublicPage({
 
   return (
     <Card className="p-6">
-      <h1 className="text-lg font-semibold text-zinc-900">Confirmar presença</h1>
-      <div className="mt-3 rounded-lg bg-zinc-50 p-4 text-sm">
-        <div className="font-medium text-zinc-900">{info.event.title}</div>
-        <div className="capitalize text-zinc-600">
+      <h1 className="text-lg font-semibold text-fg">Confirmar presença</h1>
+      <div className="mt-3 rounded-lg bg-surface-2 p-4 text-sm">
+        <div className="font-medium text-fg">{info.event.title}</div>
+        <div className="capitalize text-fg-muted">
           {formatLong(info.event.event_date)}
           {info.event.start_time
             ? ` • ${formatTime(info.event.start_time)}`
             : ""}
         </div>
-        <div className="mt-2 text-zinc-600">
+        <div className="mt-2 text-fg-muted">
           {info.team} · {info.role}
           {info.person ? ` · ${info.person}` : ""}
         </div>

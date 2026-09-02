@@ -56,9 +56,9 @@ export function AssignmentBoard({
                 : "Você não coordena esta equipe — somente leitura."
             }
           />
-          <div className="divide-y divide-zinc-100">
+          <div className="divide-y divide-border-soft">
             {team.roles.length === 0 ? (
-              <p className="px-5 py-4 text-sm text-zinc-400">
+              <p className="px-5 py-4 text-sm text-fg-soft">
                 Sem funções ativas.
               </p>
             ) : (
@@ -103,7 +103,7 @@ function RoleRow({
 
   return (
     <div className="flex flex-wrap items-center gap-3 px-5 py-3">
-      <div className="w-40 shrink-0 text-sm text-zinc-600">{role.roleName}</div>
+      <div className="w-40 shrink-0 text-sm text-fg-muted">{role.roleName}</div>
       <div className="min-w-[220px] flex-1">
         {canManage ? (
           <Select
@@ -120,7 +120,7 @@ function RoleRow({
             ))}
           </Select>
         ) : (
-          <span className="text-sm font-medium text-zinc-900">
+          <span className="text-sm font-medium text-fg">
             {members.find((m) => m.id === role.currentUserId)?.name ??
               "em aberto"}
           </span>
@@ -130,12 +130,12 @@ function RoleRow({
         {ASSIGNMENT_STATUS_LABEL[role.status]}
       </Badge>
       {selected && selected.availability === "no" ? (
-        <span className="text-xs text-red-600">
+        <span className="text-xs text-red-600 dark:text-red-400">
           Atenção: marcou indisponível
         </span>
       ) : null}
       {selected && selected.elsewhere.length ? (
-        <span className="text-xs text-amber-600">
+        <span className="text-xs text-amber-600 dark:text-amber-400">
           Já escalado neste dia
         </span>
       ) : null}

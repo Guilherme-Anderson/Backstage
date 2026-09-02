@@ -52,8 +52,8 @@ export default function CriarAcessoPage() {
 
   return (
     <Card className="p-6">
-      <h1 className="mb-1 text-lg font-semibold text-zinc-900">Primeiro acesso</h1>
-      <p className="mb-4 text-sm text-zinc-500">
+      <h1 className="mb-1 text-lg font-semibold text-fg">Primeiro acesso</h1>
+      <p className="mb-4 text-sm text-fg-muted">
         Use o e-mail que o administrador cadastrou e defina sua senha.
       </p>
       <form action={onSubmit} className="space-y-4">
@@ -89,7 +89,7 @@ export default function CriarAcessoPage() {
         </SubmitButton>
       </form>
       <div className="mt-4 text-sm">
-        <Link href="/entrar" className="text-sky-600 hover:underline">
+        <Link href="/entrar" className="text-sky-600 dark:text-sky-400 hover:underline">
           Já tenho acesso
         </Link>
       </div>

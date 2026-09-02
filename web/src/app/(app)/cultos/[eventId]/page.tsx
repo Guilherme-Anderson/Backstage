@@ -47,10 +47,10 @@ export default async function EventPage({
     <div className="space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <Link href="/cultos" className="text-sm text-sky-600 hover:underline">
+          <Link href="/cultos" className="text-sm text-sky-600 dark:text-sky-400 hover:underline">
             ← Cultos
           </Link>
-          <h1 className="mt-1 text-xl font-semibold text-zinc-900">
+          <h1 className="mt-1 text-xl font-semibold text-fg">
             {ev.title}
             {ev.kind === "extra" ? (
               <Badge tone="sky" className="ml-2 align-middle">
@@ -58,7 +58,7 @@ export default async function EventPage({
               </Badge>
             ) : null}
           </h1>
-          <p className="text-sm text-zinc-500">
+          <p className="text-sm text-fg-muted">
             {formatLong(ev.date)}
             {ev.time ? ` • ${formatTime(ev.time)}` : ""}
           </p>
@@ -81,10 +81,10 @@ export default async function EventPage({
             {ev.teams.length === 0 ? (
               <EmptyState>Nenhuma equipe neste evento.</EmptyState>
             ) : (
-              <div className="divide-y divide-zinc-100">
+              <div className="divide-y divide-border-soft">
                 {ev.teams.map((team) => (
                   <div key={team.teamId} className="px-5 py-4">
-                    <h3 className="mb-2 text-sm font-semibold text-zinc-900">
+                    <h3 className="mb-2 text-sm font-semibold text-fg">
                       {team.teamName}
                     </h3>
                     <ul className="space-y-1.5">
@@ -93,13 +93,13 @@ export default async function EventPage({
                           key={a.id}
                           className="flex items-center justify-between gap-3 text-sm"
                         >
-                          <span className="text-zinc-600">{a.roleName}</span>
+                          <span className="text-fg-muted">{a.roleName}</span>
                           <span className="flex items-center gap-2">
                             <span
                               className={
                                 a.personName
-                                  ? "font-medium text-zinc-900"
-                                  : "text-zinc-400"
+                                  ? "font-medium text-fg"
+                                  : "text-fg-soft"
                               }
                             >
                               {a.personName ?? "em aberto"}
@@ -111,7 +111,7 @@ export default async function EventPage({
                         </li>
                       ))}
                       {team.assignments.length === 0 ? (
-                        <li className="text-sm text-zinc-400">
+                        <li className="text-sm text-fg-soft">
                           Sem funções ativas nesta equipe.
                         </li>
                       ) : null}
@@ -123,27 +123,27 @@ export default async function EventPage({
           </Card>
 
           <Card className="p-5">
-            <h2 className="mb-1 text-base font-semibold text-zinc-900">
+            <h2 className="mb-1 text-base font-semibold text-fg">
               Informações do culto
             </h2>
-            <p className="mb-4 text-sm text-zinc-500">
+            <p className="mb-4 text-sm text-fg-muted">
               Preletor, músicas, ordem do culto — editável por qualquer
               coordenador ou administrador.
             </p>
             {canEditAnything ? (
               <EventInfoForm eventId={ev.id} info={ev.info} />
             ) : (
-              <p className="text-sm text-zinc-500">Somente leitura.</p>
+              <p className="text-sm text-fg-muted">Somente leitura.</p>
             )}
           </Card>
         </div>
 
         <div className="space-y-6">
           <Card className="p-5">
-            <h2 className="mb-1 text-base font-semibold text-zinc-900">
+            <h2 className="mb-1 text-base font-semibold text-fg">
               Prévia do resumo (D-1)
             </h2>
-            <p className="mb-3 text-sm text-zinc-500">
+            <p className="mb-3 text-sm text-fg-muted">
               Texto que será enviado no WhatsApp um dia antes (leva 2). Já dá para
               copiar e enviar manualmente.
             </p>
@@ -152,7 +152,7 @@ export default async function EventPage({
 
           {session.isAdmin || ev.kind === "extra" ? (
             <Card className="p-5">
-              <h2 className="mb-3 text-base font-semibold text-zinc-900">
+              <h2 className="mb-3 text-base font-semibold text-fg">
                 Dados do evento
               </h2>
               <EventBasicsForm

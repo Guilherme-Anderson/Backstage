@@ -71,14 +71,14 @@ export function TeamManager({
           {members.length === 0 ? (
             <EmptyState>Nenhum membro ainda.</EmptyState>
           ) : (
-            <ul className="divide-y divide-zinc-100">
+            <ul className="divide-y divide-border-soft">
               {members.map((m) => (
                 <li
                   key={m.id}
                   className="flex flex-wrap items-center justify-between gap-3 px-5 py-3"
                 >
                   <div>
-                    <div className="font-medium text-zinc-900">
+                    <div className="font-medium text-fg">
                       {m.users?.full_name}
                       {m.is_coordinator ? (
                         <Badge tone="sky" className="ml-2">
@@ -89,7 +89,7 @@ export function TeamManager({
                         <Badge className="ml-2">Inativo</Badge>
                       ) : null}
                     </div>
-                    <div className="text-sm text-zinc-500">
+                    <div className="text-sm text-fg-muted">
                       {formatPhoneBR(m.users?.phone_e164)}
                       {m.users?.email ? ` · ${m.users.email}` : ""}
                     </div>
@@ -145,7 +145,7 @@ export function TeamManager({
             </ul>
           )}
           {canManage ? (
-            <div className="border-t border-zinc-100 p-5">
+            <div className="border-t border-border-soft p-5">
               <AddMemberForm teamId={team.id} isAdmin={isAdmin} />
             </div>
           ) : null}
@@ -160,13 +160,13 @@ export function TeamManager({
           {roles.length === 0 ? (
             <EmptyState>Nenhuma função cadastrada.</EmptyState>
           ) : (
-            <ul className="divide-y divide-zinc-100">
+            <ul className="divide-y divide-border-soft">
               {roles.map((r) => (
                 <li
                   key={r.id}
                   className="flex items-center justify-between gap-3 px-5 py-3"
                 >
-                  <span className="text-zinc-900">
+                  <span className="text-fg">
                     {r.name}
                     {!r.active ? <Badge className="ml-2">Inativa</Badge> : null}
                   </span>
@@ -187,7 +187,7 @@ export function TeamManager({
             </ul>
           )}
           {canManage ? (
-            <div className="border-t border-zinc-100 p-5">
+            <div className="border-t border-border-soft p-5">
               <AddRoleForm teamId={team.id} />
             </div>
           ) : null}
@@ -197,7 +197,7 @@ export function TeamManager({
       {/* -------------------- Dados da equipe (admin) -------------------- */}
       {isAdmin ? (
         <Card className="h-fit p-5">
-          <h2 className="mb-3 text-base font-semibold text-zinc-900">
+          <h2 className="mb-3 text-base font-semibold text-fg">
             Dados da equipe
           </h2>
           <EditTeamForm team={team} />
@@ -228,7 +228,7 @@ function AddMemberForm({
       </div>
       {isAdmin ? (
         <>
-          <label className="flex items-center gap-2 text-sm text-zinc-700">
+          <label className="flex items-center gap-2 text-sm text-fg">
             <input
               type="checkbox"
               name="as_login"
@@ -244,7 +244,7 @@ function AddMemberForm({
           ) : null}
         </>
       ) : (
-        <label className="flex items-center gap-2 text-sm text-zinc-700">
+        <label className="flex items-center gap-2 text-sm text-fg">
           <input type="checkbox" name="is_coordinator" />
           É coordenador desta equipe
         </label>
@@ -267,7 +267,7 @@ function AddRoleForm({ teamId }: { teamId: string }) {
       </div>
       <SubmitButton size="sm">Adicionar</SubmitButton>
       {state?.error ? (
-        <p className="w-full text-sm text-red-600">{state.error}</p>
+        <p className="w-full text-sm text-red-600 dark:text-red-400">{state.error}</p>
       ) : null}
     </form>
   );
@@ -287,13 +287,13 @@ function EditTeamForm({ team }: { team: TeamRow }) {
           defaultValue={team.description ?? ""}
         />
       </Field>
-      <label className="flex items-center gap-2 text-sm text-zinc-700">
+      <label className="flex items-center gap-2 text-sm text-fg">
         <input type="checkbox" name="active" defaultChecked={team.active} />
         Equipe ativa
       </label>
       <FormError>{state?.error}</FormError>
       {state?.ok ? (
-        <p className="text-sm text-emerald-600">Salvo.</p>
+        <p className="text-sm text-emerald-600 dark:text-emerald-400">Salvo.</p>
       ) : null}
       <SubmitButton size="sm">Salvar</SubmitButton>
     </form>

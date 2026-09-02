@@ -31,10 +31,10 @@ export function GeneralSettingsForm({
         />
       </Field>
       <fieldset className="space-y-2">
-        <legend className="text-sm font-medium text-zinc-700">
+        <legend className="text-sm font-medium text-fg">
           Disparos automáticos (leva 2)
         </legend>
-        <label className="flex items-center gap-2 text-sm text-zinc-700">
+        <label className="flex items-center gap-2 text-sm text-fg">
           <input
             type="checkbox"
             name="cron_request_availability_enabled"
@@ -42,7 +42,7 @@ export function GeneralSettingsForm({
           />
           Pedido mensal de disponibilidade
         </label>
-        <label className="flex items-center gap-2 text-sm text-zinc-700">
+        <label className="flex items-center gap-2 text-sm text-fg">
           <input
             type="checkbox"
             name="cron_weekly_reminders_enabled"
@@ -50,7 +50,7 @@ export function GeneralSettingsForm({
           />
           Lembrete semanal individual
         </label>
-        <label className="flex items-center gap-2 text-sm text-zinc-700">
+        <label className="flex items-center gap-2 text-sm text-fg">
           <input
             type="checkbox"
             name="cron_event_summary_enabled"
@@ -60,7 +60,7 @@ export function GeneralSettingsForm({
         </label>
       </fieldset>
       <FormError>{state?.error}</FormError>
-      {state?.ok ? <p className="text-sm text-emerald-600">Salvo.</p> : null}
+      {state?.ok ? <p className="text-sm text-emerald-600 dark:text-emerald-400">Salvo.</p> : null}
       <SubmitButton size="sm">Salvar</SubmitButton>
     </form>
   );

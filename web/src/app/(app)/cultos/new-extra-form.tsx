@@ -33,14 +33,14 @@ export function NewExtraEventForm({
         </Field>
       </div>
       <div>
-        <span className="mb-1 block text-sm font-medium text-zinc-700">
+        <span className="mb-1 block text-sm font-medium text-fg">
           Equipes participantes
         </span>
         <div className="flex flex-wrap gap-3">
           {teams.map((t) => (
             <label
               key={t.id}
-              className="flex items-center gap-2 rounded-lg border border-zinc-300 px-3 py-1.5 text-sm"
+              className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-sm"
             >
               <input type="checkbox" name="team_ids" value={t.id} />
               {t.name}

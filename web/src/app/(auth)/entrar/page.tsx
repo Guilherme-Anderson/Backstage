@@ -33,8 +33,8 @@ function EntrarForm() {
 
   return (
     <Card className="p-6">
-      <h1 className="mb-1 text-lg font-semibold text-zinc-900">Entrar</h1>
-      <p className="mb-4 text-sm text-zinc-500">
+      <h1 className="mb-1 text-lg font-semibold text-fg">Entrar</h1>
+      <p className="mb-4 text-sm text-fg-muted">
         Acesso para administradores e coordenadores.
       </p>
       <form action={onSubmit} className="space-y-4">
@@ -56,10 +56,10 @@ function EntrarForm() {
         </SubmitButton>
       </form>
       <div className="mt-4 flex justify-between text-sm">
-        <Link href="/esqueci-senha" className="text-sky-600 hover:underline">
+        <Link href="/esqueci-senha" className="text-sky-600 dark:text-sky-400 hover:underline">
           Esqueci a senha
         </Link>
-        <Link href="/criar-acesso" className="text-sky-600 hover:underline">
+        <Link href="/criar-acesso" className="text-sky-600 dark:text-sky-400 hover:underline">
           Primeiro acesso
         </Link>
       </div>

@@ -32,21 +32,22 @@ export default async function CultosPage({
     daysInMonth(year, month),
   ).padStart(2, "0")}`;
 
-  const { data: events } = await supabase
-    .from("events")
-    .select(
-      "id, title, event_date, start_time, kind, event_teams(team_id), assignments(status)",
-    )
-    .gte("event_date", first)
-    .lte("event_date", last)
-    .order("event_date", { ascending: true })
-    .order("start_time", { ascending: true });
-
-  const { data: teams } = await supabase
-    .from("teams")
-    .select("id, name, active")
-    .eq("active", true)
-    .order("sort_order", { ascending: true });
+  const [{ data: events }, { data: teams }] = await Promise.all([
+    supabase
+      .from("events")
+      .select(
+        "id, title, event_date, start_time, kind, event_teams(team_id), assignments(status)",
+      )
+      .gte("event_date", first)
+      .lte("event_date", last)
+      .order("event_date", { ascending: true })
+      .order("start_time", { ascending: true }),
+    supabase
+      .from("teams")
+      .select("id, name, active")
+      .eq("active", true)
+      .order("sort_order", { ascending: true }),
+  ]);
 
   const prev = month === 1 ? { y: year - 1, m: 12 } : { y: year, m: month - 1 };
   const next = month === 12 ? { y: year + 1, m: 1 } : { y: year, m: month + 1 };
@@ -55,8 +56,8 @@ export default async function CultosPage({
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-zinc-900">Cultos e eventos</h1>
-          <p className="text-sm text-zinc-500 capitalize">
+          <h1 className="text-xl font-semibold text-fg">Cultos e eventos</h1>
+          <p className="text-sm text-fg-muted capitalize">
             {monthLabel(year, month)}
           </p>
         </div>
@@ -98,7 +99,7 @@ export default async function CultosPage({
             Nenhum culto neste mês. Use “Gerar cultos recorrentes”.
           </EmptyState>
         ) : (
-          <ul className="divide-y divide-zinc-100">
+          <ul className="divide-y divide-border-soft">
             {events.map((ev) => {
               const total = ev.assignments?.length ?? 0;
               const filled =
@@ -111,10 +112,10 @@ export default async function CultosPage({
                 <li key={ev.id}>
                   <Link
                     href={`/cultos/${ev.id}`}
-                    className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-zinc-50"
+                    className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-surface-2"
                   >
                     <div>
-                      <div className="font-medium text-zinc-900">
+                      <div className="font-medium text-fg">
                         {ev.title}
                         {ev.kind === "extra" ? (
                           <Badge tone="sky" className="ml-2">
@@ -122,7 +123,7 @@ export default async function CultosPage({
                           </Badge>
                         ) : null}
                       </div>
-                      <div className="text-sm text-zinc-500">
+                      <div className="text-sm text-fg-muted">
                         {formatShort(ev.event_date)}
                         {ev.start_time
                           ? ` • ${formatTime(ev.start_time)}`
@@ -148,7 +149,7 @@ export default async function CultosPage({
       </Card>
 
       <Card className="p-5">
-        <h2 className="mb-3 text-base font-semibold text-zinc-900">
+        <h2 className="mb-3 text-base font-semibold text-fg">
           Novo evento extra
         </h2>
         <NewExtraEventForm teams={teams ?? []} defaultDate={first} />

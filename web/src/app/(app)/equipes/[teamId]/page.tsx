@@ -15,26 +15,26 @@ export default async function TeamPage({
   const session = await requireSession();
   const supabase = await createClient();
 
-  const { data: team } = await supabase
-    .from("teams")
-    .select("id, name, description, active")
-    .eq("id", teamId)
-    .maybeSingle();
+  const [{ data: team }, { data: members }, { data: roles }] = await Promise.all([
+    supabase
+      .from("teams")
+      .select("id, name, description, active")
+      .eq("id", teamId)
+      .maybeSingle(),
+    supabase
+      .from("team_members")
+      .select(
+        "id, is_coordinator, active, joined_at, users(id, full_name, phone_e164, email, role, active)",
+      )
+      .eq("team_id", teamId)
+      .order("joined_at", { ascending: true }),
+    supabase
+      .from("roles")
+      .select("id, name, active, sort_order")
+      .eq("team_id", teamId)
+      .order("sort_order", { ascending: true }),
+  ]);
   if (!team) notFound();
-
-  const { data: members } = await supabase
-    .from("team_members")
-    .select(
-      "id, is_coordinator, active, joined_at, users(id, full_name, phone_e164, email, role, active)",
-    )
-    .eq("team_id", teamId)
-    .order("joined_at", { ascending: true });
-
-  const { data: roles } = await supabase
-    .from("roles")
-    .select("id, name, active, sort_order")
-    .eq("team_id", teamId)
-    .order("sort_order", { ascending: true });
 
   const canManage =
     session.isAdmin || session.coordinatorTeamIds.includes(teamId);
@@ -42,15 +42,15 @@ export default async function TeamPage({
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/equipes" className="text-sm text-sky-600 hover:underline">
+        <Link href="/equipes" className="text-sm text-sky-600 dark:text-sky-400 hover:underline">
           ← Equipes
         </Link>
-        <h1 className="mt-1 text-xl font-semibold text-zinc-900">{team.name}</h1>
-        <p className="text-sm text-zinc-500">{team.description || "—"}</p>
+        <h1 className="mt-1 text-xl font-semibold text-fg">{team.name}</h1>
+        <p className="text-sm text-fg-muted">{team.description || "—"}</p>
       </div>
 
       {!canManage ? (
-        <p className="rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-800">
+        <p className="rounded-lg bg-amber-50 dark:bg-amber-500/10 px-3 py-2 text-sm text-amber-800 dark:text-amber-200">
           Você pode ver esta equipe, mas só o coordenador dela ou um administrador
           podem editar.
         </p>

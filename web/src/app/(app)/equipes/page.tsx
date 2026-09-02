@@ -20,8 +20,8 @@ export default async function EquipesPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-900">Equipes</h1>
-        <p className="text-sm text-zinc-500">
+        <h1 className="text-xl font-semibold text-fg">Equipes</h1>
+        <p className="text-sm text-fg-muted">
           {session.isAdmin
             ? "Todas as subequipes da Backstage."
             : "Você gerencia apenas as equipes onde é coordenador."}
@@ -33,7 +33,7 @@ export default async function EquipesPage() {
         {!teams || teams.length === 0 ? (
           <EmptyState>Nenhuma equipe cadastrada.</EmptyState>
         ) : (
-          <ul className="divide-y divide-zinc-100">
+          <ul className="divide-y divide-border-soft">
             {teams.map((t) => {
               const members = (t.team_members ?? []).filter((m) => m.active);
               const canManage =
@@ -43,10 +43,10 @@ export default async function EquipesPage() {
                 <li key={t.id}>
                   <Link
                     href={`/equipes/${t.id}`}
-                    className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-zinc-50"
+                    className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-surface-2"
                   >
                     <div>
-                      <div className="font-medium text-zinc-900">
+                      <div className="font-medium text-fg">
                         {t.name}
                         {!t.active ? (
                           <Badge className="ml-2">Inativa</Badge>
@@ -57,11 +57,11 @@ export default async function EquipesPage() {
                           </Badge>
                         ) : null}
                       </div>
-                      <div className="text-sm text-zinc-500">
+                      <div className="text-sm text-fg-muted">
                         {t.description || "—"}
                       </div>
                     </div>
-                    <div className="text-sm text-zinc-500">
+                    <div className="text-sm text-fg-muted">
                       {members.length} pessoa(s) ·{" "}
                       {(t.roles ?? []).filter((r) => r.active).length} função(ões)
                     </div>
@@ -75,7 +75,7 @@ export default async function EquipesPage() {
 
       {session.isAdmin ? (
         <Card className="p-5">
-          <h2 className="mb-3 text-base font-semibold text-zinc-900">
+          <h2 className="mb-3 text-base font-semibold text-fg">
             Nova equipe
           </h2>
           <NewTeamForm />

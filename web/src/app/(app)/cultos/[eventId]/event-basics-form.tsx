@@ -43,7 +43,7 @@ export function EventBasicsForm({
         />
       </Field>
       <FormError>{state?.error}</FormError>
-      {state?.ok ? <p className="text-sm text-emerald-600">Salvo.</p> : null}
+      {state?.ok ? <p className="text-sm text-emerald-600 dark:text-emerald-400">Salvo.</p> : null}
       <SubmitButton size="sm">Salvar</SubmitButton>
     </form>
   );

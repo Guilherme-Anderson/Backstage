@@ -31,8 +31,8 @@ export default async function TrocasPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-zinc-900">Trocas</h1>
-        <p className="text-sm text-zinc-500">
+        <h1 className="text-xl font-semibold text-fg">Trocas</h1>
+        <p className="text-sm text-fg-muted">
           Quando alguém avisa que não pode, aparece aqui para você achar um
           substituto.
         </p>
@@ -43,7 +43,7 @@ export default async function TrocasPage() {
         {open.length === 0 ? (
           <EmptyState>Nenhuma troca pendente. 🎉</EmptyState>
         ) : (
-          <ul className="divide-y divide-zinc-100">
+          <ul className="divide-y divide-border-soft">
             {open.map((s) => (
               <SwapRow
                 key={s.id}
@@ -67,18 +67,18 @@ export default async function TrocasPage() {
       {closed.length > 0 ? (
         <Card>
           <CardHeader title="Histórico" />
-          <ul className="divide-y divide-zinc-100">
+          <ul className="divide-y divide-border-soft">
             {closed.map((s) => (
               <li
                 key={s.id}
                 className="flex items-center justify-between gap-3 px-5 py-3 text-sm"
               >
                 <div>
-                  <div className="font-medium text-zinc-900">
+                  <div className="font-medium text-fg">
                     {s.assignments?.person?.full_name} ·{" "}
                     {s.assignments?.roles?.name}
                   </div>
-                  <div className="text-zinc-500">
+                  <div className="text-fg-muted">
                     {s.assignments?.events?.title}
                     {s.replacement?.full_name
                       ? ` → ${s.replacement.full_name}`

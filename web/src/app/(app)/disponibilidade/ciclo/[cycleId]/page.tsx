@@ -74,11 +74,11 @@ export default async function CyclePage({
         <div>
           <Link
             href="/disponibilidade"
-            className="text-sm text-sky-600 hover:underline"
+            className="text-sm text-sky-600 dark:text-sky-400 hover:underline"
           >
             ← Disponibilidade
           </Link>
-          <h1 className="mt-1 text-xl font-semibold text-zinc-900 capitalize">
+          <h1 className="mt-1 text-xl font-semibold text-fg capitalize">
             {cycle.teams?.name} — {monthLabel(cycle.year, cycle.month)}
           </h1>
         </div>
@@ -101,7 +101,7 @@ export default async function CyclePage({
           <div className="overflow-x-auto">
             <table className="w-full min-w-[640px] text-sm">
               <thead>
-                <tr className="border-b border-zinc-200 text-left text-xs text-zinc-500">
+                <tr className="border-b border-border text-left text-xs text-fg-muted">
                   <th className="px-4 py-2 font-medium">Pessoa</th>
                   <th className="px-3 py-2 font-medium">Respondeu?</th>
                   {colKeys.map((c) => (
@@ -116,9 +116,9 @@ export default async function CyclePage({
                 {rows.map((r) => (
                   <tr
                     key={r.id}
-                    className="border-b border-zinc-100 last:border-0"
+                    className="border-b border-border-soft last:border-0"
                   >
-                    <td className="px-4 py-2 font-medium text-zinc-900">
+                    <td className="px-4 py-2 font-medium text-fg">
                       {r.users?.full_name}
                     </td>
                     <td className="px-3 py-2">
@@ -136,11 +136,11 @@ export default async function CyclePage({
                           className="px-3 py-2 text-center text-base"
                         >
                           {v === true ? (
-                            <span className="text-emerald-600">✓</span>
+                            <span className="text-emerald-600 dark:text-emerald-400">✓</span>
                           ) : v === false && r.submitted_at ? (
                             <span className="text-red-500">✗</span>
                           ) : (
-                            <span className="text-zinc-300">–</span>
+                            <span className="text-fg-soft">–</span>
                           )}
                         </td>
                       );

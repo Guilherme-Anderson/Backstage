@@ -28,10 +28,10 @@ export default function EsqueciSenhaPage() {
 
   return (
     <Card className="p-6">
-      <h1 className="mb-1 text-lg font-semibold text-zinc-900">
+      <h1 className="mb-1 text-lg font-semibold text-fg">
         Recuperar senha
       </h1>
-      <p className="mb-4 text-sm text-zinc-500">
+      <p className="mb-4 text-sm text-fg-muted">
         Enviaremos um link para você definir uma nova senha.
       </p>
       <form action={onSubmit} className="space-y-4">
@@ -49,7 +49,7 @@ export default function EsqueciSenhaPage() {
         </SubmitButton>
       </form>
       <div className="mt-4 text-sm">
-        <Link href="/entrar" className="text-sky-600 hover:underline">
+        <Link href="/entrar" className="text-sky-600 dark:text-sky-400 hover:underline">
           Voltar para entrar
         </Link>
       </div>

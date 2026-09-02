@@ -62,7 +62,7 @@ export function AvailabilityForm({
 
   if (dates.length === 0) {
     return (
-      <p className="mt-4 text-sm text-zinc-500">
+      <p className="mt-4 text-sm text-fg-muted">
         Não há cultos fixos para você neste mês.
       </p>
     );
@@ -70,7 +70,7 @@ export function AvailabilityForm({
 
   return (
     <div className="mt-4 space-y-2">
-      <ul className="divide-y divide-zinc-100 rounded-lg border border-zinc-200">
+      <ul className="divide-y divide-border-soft rounded-lg border border-border">
         {dates.map((d) => {
           const key = `${d.service_date}|${d.block}`;
           const on = Boolean(values[key]);
@@ -80,10 +80,10 @@ export function AvailabilityForm({
               className="flex items-center justify-between gap-3 px-4 py-3"
             >
               <div>
-                <div className="text-sm font-medium capitalize text-zinc-900">
+                <div className="text-sm font-medium capitalize text-fg">
                   {formatLong(d.service_date)}
                 </div>
-                <div className="text-xs text-zinc-500">{BLOCK_LABEL[d.block]}</div>
+                <div className="text-xs text-fg-muted">{BLOCK_LABEL[d.block]}</div>
               </div>
               <div className="flex gap-1">
                 <button
@@ -93,7 +93,7 @@ export function AvailabilityForm({
                   className={`h-8 rounded-md px-3 text-sm font-medium ${
                     on
                       ? "bg-emerald-600 text-white"
-                      : "bg-zinc-100 text-zinc-600"
+                      : "bg-surface-2 text-fg-muted"
                   }`}
                 >
                   Posso
@@ -103,7 +103,7 @@ export function AvailabilityForm({
                   disabled={readOnly}
                   onClick={() => setValues((v) => ({ ...v, [key]: false }))}
                   className={`h-8 rounded-md px-3 text-sm font-medium ${
-                    !on ? "bg-red-500 text-white" : "bg-zinc-100 text-zinc-600"
+                    !on ? "bg-red-500 text-white" : "bg-surface-2 text-fg-muted"
                   }`}
                 >
                   Não
@@ -115,12 +115,12 @@ export function AvailabilityForm({
       </ul>
 
       {error ? (
-        <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+        <p className="rounded-lg bg-red-50 dark:bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-300">
           {error}
         </p>
       ) : null}
       {status === "done" ? (
-        <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
+        <p className="rounded-lg bg-emerald-50 dark:bg-emerald-500/10 px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300">
           Recebido! Você pode reabrir este link e alterar enquanto o período
           estiver aberto.
         </p>

@@ -11,8 +11,8 @@ const buttonBase =
 
 const buttonVariants: Record<ButtonVariant, string> = {
   primary: "bg-sky-600 text-white hover:bg-sky-700",
-  secondary: "bg-white text-zinc-800 border border-zinc-300 hover:bg-zinc-50",
-  ghost: "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900",
+  secondary: "bg-surface text-fg border border-border hover:bg-surface-2",
+  ghost: "text-fg-muted hover:bg-surface-2 hover:text-fg",
   danger: "bg-red-600 text-white hover:bg-red-700",
 };
 
@@ -69,7 +69,7 @@ export function Input({
   return (
     <input
       className={cn(
-        "h-10 w-full rounded-lg border border-zinc-300 bg-white px-3 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500",
+        "h-10 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg placeholder:text-fg-soft focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500",
         className,
       )}
       {...props}
@@ -84,7 +84,7 @@ export function Textarea({
   return (
     <textarea
       className={cn(
-        "min-h-[80px] w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500",
+        "min-h-[80px] w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-fg placeholder:text-fg-soft focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500",
         className,
       )}
       {...props}
@@ -99,7 +99,7 @@ export function Select({
   return (
     <select
       className={cn(
-        "h-10 w-full rounded-lg border border-zinc-300 bg-white px-3 text-sm text-zinc-900 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500",
+        "h-10 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500",
         className,
       )}
       {...props}
@@ -113,7 +113,7 @@ export function Label({
 }: React.LabelHTMLAttributes<HTMLLabelElement>) {
   return (
     <label
-      className={cn("mb-1 block text-sm font-medium text-zinc-700", className)}
+      className={cn("mb-1 block text-sm font-medium text-fg", className)}
       {...props}
     />
   );
@@ -134,7 +134,7 @@ export function Field({
     <div>
       <Label htmlFor={htmlFor}>{label}</Label>
       {children}
-      {hint ? <p className="mt-1 text-xs text-zinc-500">{hint}</p> : null}
+      {hint ? <p className="mt-1 text-xs text-fg-muted">{hint}</p> : null}
     </div>
   );
 }
@@ -147,7 +147,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-xl border border-zinc-200 bg-white shadow-sm",
+        "rounded-xl border border-border bg-surface shadow-sm",
         className,
       )}
       {...props}
@@ -165,11 +165,11 @@ export function CardHeader({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 border-b border-zinc-100 px-5 py-4">
+    <div className="flex items-start justify-between gap-4 border-b border-border-soft px-5 py-4">
       <div>
-        <h2 className="text-base font-semibold text-zinc-900">{title}</h2>
+        <h2 className="text-base font-semibold text-fg">{title}</h2>
         {description ? (
-          <p className="mt-0.5 text-sm text-zinc-500">{description}</p>
+          <p className="mt-0.5 text-sm text-fg-muted">{description}</p>
         ) : null}
       </div>
       {action}
@@ -179,11 +179,11 @@ export function CardHeader({
 
 /* ----------------------------- Badge ----------------------------- */
 const badgeTones = {
-  neutral: "bg-zinc-100 text-zinc-700",
-  amber: "bg-amber-100 text-amber-800",
-  green: "bg-emerald-100 text-emerald-800",
-  red: "bg-red-100 text-red-700",
-  sky: "bg-sky-100 text-sky-800",
+  neutral: "bg-surface-2 text-fg",
+  amber: "bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200",
+  green: "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200",
+  red: "bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-300",
+  sky: "bg-sky-100 dark:bg-sky-500/20 text-sky-800 dark:text-sky-200",
 } as const;
 
 export function Badge({
@@ -212,7 +212,7 @@ export function Badge({
 export function FormError({ children }: { children?: React.ReactNode }) {
   if (!children) return null;
   return (
-    <p className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+    <p className="rounded-lg bg-red-50 dark:bg-red-500/10 px-3 py-2 text-sm text-red-700 dark:text-red-300">
       {children}
     </p>
   );
@@ -221,7 +221,7 @@ export function FormError({ children }: { children?: React.ReactNode }) {
 export function FormSuccess({ children }: { children?: React.ReactNode }) {
   if (!children) return null;
   return (
-    <p className="rounded-lg bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
+    <p className="rounded-lg bg-emerald-50 dark:bg-emerald-500/10 px-3 py-2 text-sm text-emerald-700 dark:text-emerald-300">
       {children}
     </p>
   );
@@ -229,6 +229,6 @@ export function FormSuccess({ children }: { children?: React.ReactNode }) {
 
 export function EmptyState({ children }: { children: React.ReactNode }) {
   return (
-    <div className="px-5 py-10 text-center text-sm text-zinc-500">{children}</div>
+    <div className="px-5 py-10 text-center text-sm text-fg-muted">{children}</div>
   );
 }

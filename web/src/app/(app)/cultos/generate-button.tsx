@@ -16,7 +16,7 @@ export function GenerateRecurringButton({
 
   return (
     <div className="flex items-center gap-2">
-      {msg ? <span className="text-xs text-emerald-600">{msg}</span> : null}
+      {msg ? <span className="text-xs text-emerald-600 dark:text-emerald-400">{msg}</span> : null}
       <Button
         variant="secondary"
         size="sm"

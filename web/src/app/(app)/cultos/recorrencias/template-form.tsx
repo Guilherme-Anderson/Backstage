@@ -41,14 +41,14 @@ export function TemplateForm({
         />
       </Field>
       <div>
-        <span className="mb-1 block text-sm font-medium text-zinc-700">
+        <span className="mb-1 block text-sm font-medium text-fg">
           Equipes
         </span>
         <div className="flex flex-wrap gap-2">
           {teams.map((t) => (
             <label
               key={t.id}
-              className="flex items-center gap-1.5 rounded-lg border border-zinc-300 px-2.5 py-1 text-sm"
+              className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1 text-sm"
             >
               <input
                 type="checkbox"
@@ -61,12 +61,12 @@ export function TemplateForm({
           ))}
         </div>
       </div>
-      <label className="flex items-center gap-2 text-sm text-zinc-700">
+      <label className="flex items-center gap-2 text-sm text-fg">
         <input type="checkbox" name="active" defaultChecked={template.active} />
         Ativa
       </label>
       <FormError>{state?.error}</FormError>
-      {state?.ok ? <p className="text-sm text-emerald-600">Salvo.</p> : null}
+      {state?.ok ? <p className="text-sm text-emerald-600 dark:text-emerald-400">Salvo.</p> : null}
       <SubmitButton size="sm">Salvar</SubmitButton>
     </form>
   );

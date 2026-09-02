@@ -25,13 +25,13 @@ export default async function RecorrenciasPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/cultos" className="text-sm text-sky-600 hover:underline">
+        <Link href="/cultos" className="text-sm text-sky-600 dark:text-sky-400 hover:underline">
           ← Cultos
         </Link>
-        <h1 className="mt-1 text-xl font-semibold text-zinc-900">
+        <h1 className="mt-1 text-xl font-semibold text-fg">
           Recorrências
         </h1>
-        <p className="text-sm text-zinc-500">
+        <p className="text-sm text-fg-muted">
           Modelos usados por “Gerar cultos recorrentes”. O dia da semana é fixo.
         </p>
       </div>
@@ -39,7 +39,7 @@ export default async function RecorrenciasPage() {
       <div className="grid gap-4 md:grid-cols-2">
         {(templates ?? []).map((t) => (
           <Card key={t.id} className="p-5">
-            <div className="mb-1 text-xs font-medium uppercase tracking-wide text-zinc-400">
+            <div className="mb-1 text-xs font-medium uppercase tracking-wide text-fg-soft">
               {WEEKDAY_LONG[t.weekday]}
             </div>
             <TemplateForm
