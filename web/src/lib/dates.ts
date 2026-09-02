@@ -61,6 +61,18 @@ export function currentYearMonth(ref: ISODate = todayISO()): {
   return { year: y, month: m };
 }
 
+/**
+ * Mês "alvo" para montar escala: a partir do dia 15, já assume o mês seguinte
+ * (a essa altura a disponibilidade normalmente já foi coletada).
+ */
+export function schedulingYearMonth(ref: ISODate = todayISO()): {
+  year: number;
+  month: number;
+} {
+  const day = Number(ref.split("-")[2]);
+  return day >= 15 ? nextMonth(ref) : currentYearMonth(ref);
+}
+
 /** Número de dias no mês (month 1-12). */
 export function daysInMonth(year: number, month: number): number {
   return new Date(Date.UTC(year, month, 0)).getUTCDate();
