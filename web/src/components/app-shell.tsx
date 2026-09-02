@@ -50,7 +50,7 @@ export function AppShell({
                     className={cn(
                       "rounded-md px-3 py-1.5 text-sm font-medium",
                       active
-                        ? "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-300"
+                        ? "bg-accent-soft text-accent-soft-fg"
                         : "text-fg-muted hover:bg-surface-2 hover:text-fg",
                     )}
                   >

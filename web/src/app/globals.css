@@ -5,25 +5,41 @@
 /* ---------- tokens de cor ---------- */
 :root,
 [data-theme="light"] {
-  --bg: #fafafa;
+  --bg: #faf9fc;
   --surface: #ffffff;
-  --surface-2: #f4f4f5;
-  --border: #e4e4e7;
-  --border-soft: #f1f1f3;
-  --fg: #18181b;
-  --fg-muted: #52525b;
-  --fg-soft: #a1a1aa;
+  --surface-2: #f3f1fa;
+  --border: #e6e1f2;
+  --border-soft: #efecf8;
+  --fg: #1b1526;
+  --fg-muted: #574f6b;
+  --fg-soft: #948caa;
+
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --accent-contrast: #ffffff;
+  --accent-soft-bg: rgba(124, 58, 237, 0.1);
+  --accent-soft-fg: #6d28d9;
+  --link: #6d28d9;
+  --ring: #7c3aed;
 }
 
 [data-theme="dark"] {
-  --bg: #0a0a0b;
-  --surface: #161618;
-  --surface-2: #202023;
-  --border: #2a2a2e;
-  --border-soft: #232327;
-  --fg: #f4f4f5;
-  --fg-muted: #a1a1aa;
-  --fg-soft: #71717a;
+  --bg: #0a0910;
+  --surface: #151221;
+  --surface-2: #201b32;
+  --border: #322c48;
+  --border-soft: #28223b;
+  --fg: #f3f1fb;
+  --fg-muted: #aca3c6;
+  --fg-soft: #786f95;
+
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --accent-contrast: #ffffff;
+  --accent-soft-bg: rgba(139, 92, 246, 0.18);
+  --accent-soft-fg: #cbbcff;
+  --link: #c4b5fd;
+  --ring: #8b5cf6;
 }
 
 @theme inline {
@@ -35,6 +51,13 @@
   --color-fg: var(--fg);
   --color-fg-muted: var(--fg-muted);
   --color-fg-soft: var(--fg-soft);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-accent-soft: var(--accent-soft-bg);
+  --color-accent-soft-fg: var(--accent-soft-fg);
+  --color-link: var(--link);
+  --color-ring: var(--ring);
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, sans-serif;
@@ -44,16 +67,15 @@ html {
   -webkit-text-size-adjust: 100%;
   color-scheme: light dark;
 }
-
-body {
-  background-color: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans);
-}
-
 [data-theme="dark"] {
   color-scheme: dark;
 }
 [data-theme="light"] {
   color-scheme: light;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
 }

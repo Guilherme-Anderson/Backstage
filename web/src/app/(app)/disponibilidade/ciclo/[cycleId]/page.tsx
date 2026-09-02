@@ -74,7 +74,7 @@ export default async function CyclePage({
         <div>
           <Link
             href="/disponibilidade"
-            className="text-sm text-sky-600 dark:text-sky-400 hover:underline"
+            className="text-sm text-link hover:underline"
           >
             ← Disponibilidade
           </Link>

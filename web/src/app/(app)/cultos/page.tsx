@@ -114,7 +114,7 @@ export default async function CultosPage({
                     href={`/cultos/${ev.id}`}
                     className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-surface-2"
                   >
-                    <div>
+                    <div className="min-w-0">
                       <div className="font-medium text-fg">
                         {ev.title}
                         {ev.kind === "extra" ? (

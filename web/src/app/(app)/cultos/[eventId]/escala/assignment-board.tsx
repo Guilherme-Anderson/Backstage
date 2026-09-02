@@ -102,9 +102,11 @@ function RoleRow({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-3 px-5 py-3">
-      <div className="w-40 shrink-0 text-sm text-fg-muted">{role.roleName}</div>
-      <div className="min-w-[220px] flex-1">
+    <div className="flex flex-col gap-2 px-5 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+      <div className="text-sm font-medium text-fg sm:w-40 sm:shrink-0 sm:font-normal sm:text-fg-muted">
+        {role.roleName}
+      </div>
+      <div className="w-full sm:min-w-[220px] sm:flex-1">
         {canManage ? (
           <Select
             value={value}

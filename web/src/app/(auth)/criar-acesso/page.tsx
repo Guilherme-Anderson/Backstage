@@ -89,7 +89,7 @@ export default function CriarAcessoPage() {
         </SubmitButton>
       </form>
       <div className="mt-4 text-sm">
-        <Link href="/entrar" className="text-sky-600 dark:text-sky-400 hover:underline">
+        <Link href="/entrar" className="text-link hover:underline">
           Já tenho acesso
         </Link>
       </div>

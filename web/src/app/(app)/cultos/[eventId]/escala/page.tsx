@@ -187,7 +187,7 @@ export default async function EscalaPage({
       <div>
         <Link
           href={`/cultos/${eventId}`}
-          className="text-sm text-sky-600 dark:text-sky-400 hover:underline"
+          className="text-sm text-link hover:underline"
         >
           ← {event.title}
         </Link>

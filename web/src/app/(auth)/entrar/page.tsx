@@ -56,10 +56,10 @@ function EntrarForm() {
         </SubmitButton>
       </form>
       <div className="mt-4 flex justify-between text-sm">
-        <Link href="/esqueci-senha" className="text-sky-600 dark:text-sky-400 hover:underline">
+        <Link href="/esqueci-senha" className="text-link hover:underline">
           Esqueci a senha
         </Link>
-        <Link href="/criar-acesso" className="text-sky-600 dark:text-sky-400 hover:underline">
+        <Link href="/criar-acesso" className="text-link hover:underline">
           Primeiro acesso
         </Link>
       </div>

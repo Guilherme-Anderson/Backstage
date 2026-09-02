@@ -60,7 +60,7 @@ export default async function PainelPage() {
         {!events || events.length === 0 ? (
           <EmptyState>
             Nenhum culto futuro cadastrado.{" "}
-            <Link href="/cultos" className="text-sky-600 dark:text-sky-400 hover:underline">
+            <Link href="/cultos" className="text-link hover:underline">
               Gerar cultos do mês
             </Link>
             .
@@ -82,7 +82,7 @@ export default async function PainelPage() {
                     href={`/cultos/${ev.id}`}
                     className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-surface-2"
                   >
-                    <div>
+                    <div className="min-w-0">
                       <div className="font-medium text-fg">
                         {ev.title}
                         {ev.kind === "extra" ? (
@@ -97,7 +97,7 @@ export default async function PainelPage() {
                         {ev.event_teams?.length ?? 0} equipe(s)
                       </div>
                     </div>
-                    <div className="text-right">
+                    <div className="shrink-0 text-right">
                       {declined > 0 ? (
                         <Badge tone="red">{declined} sem poder</Badge>
                       ) : complete ? (

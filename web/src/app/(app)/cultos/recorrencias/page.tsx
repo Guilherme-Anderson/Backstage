@@ -25,7 +25,7 @@ export default async function RecorrenciasPage() {
   return (
     <div className="space-y-6">
       <div>
-        <Link href="/cultos" className="text-sm text-sky-600 dark:text-sky-400 hover:underline">
+        <Link href="/cultos" className="text-sm text-link hover:underline">
           ← Cultos
         </Link>
         <h1 className="mt-1 text-xl font-semibold text-fg">

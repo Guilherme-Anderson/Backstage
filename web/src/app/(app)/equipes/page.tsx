@@ -43,25 +43,21 @@ export default async function EquipesPage() {
                 <li key={t.id}>
                   <Link
                     href={`/equipes/${t.id}`}
-                    className="flex items-center justify-between gap-3 px-5 py-3 hover:bg-surface-2"
+                    className="flex flex-col gap-1 px-5 py-3 hover:bg-surface-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3"
                   >
-                    <div>
-                      <div className="font-medium text-fg">
-                        {t.name}
-                        {!t.active ? (
-                          <Badge className="ml-2">Inativa</Badge>
-                        ) : null}
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 font-medium text-fg">
+                        <span>{t.name}</span>
+                        {!t.active ? <Badge>Inativa</Badge> : null}
                         {canManage ? (
-                          <Badge tone="sky" className="ml-2">
-                            Você coordena
-                          </Badge>
+                          <Badge tone="sky">Você coordena</Badge>
                         ) : null}
                       </div>
                       <div className="text-sm text-fg-muted">
                         {t.description || "—"}
                       </div>
                     </div>
-                    <div className="text-sm text-fg-muted">
+                    <div className="shrink-0 text-sm text-fg-muted sm:text-right">
                       {members.length} pessoa(s) ·{" "}
                       {(t.roles ?? []).filter((r) => r.active).length} função(ões)
                     </div>

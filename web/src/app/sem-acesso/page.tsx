@@ -14,7 +14,7 @@ export default function SemAcessoPage() {
           com um administrador do sistema.
         </p>
         <form action="/auth/sair" method="post" className="mt-6">
-          <button className="text-sm text-sky-600 dark:text-sky-400 hover:underline">
+          <button className="text-sm text-link hover:underline">
             Sair
           </button>
         </form>
