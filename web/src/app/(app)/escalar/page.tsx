@@ -3,11 +3,7 @@ import { requireSession } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import { Card, EmptyState } from "@/components/ui";
 import { daysInMonth, monthLabel, schedulingYearMonth } from "@/lib/dates";
-import {
-  MonthBoard,
-  type BoardEvent,
-  type Availability,
-} from "./month-board";
+import { MonthBoard, type BoardEvent, type Availability } from "./month-board";
 
 export const dynamic = "force-dynamic";
 
@@ -64,12 +60,9 @@ export default async function EscalarPage({
   const first = `${year}-${pad(month)}-01`;
   const last = `${year}-${pad(month)}-${pad(daysInMonth(year, month))}`;
 
-  // eventos do mês que incluem esta equipe
   const { data: etRows } = await supabase
     .from("event_teams")
-    .select(
-      "event_id, events!inner(id, title, event_date, start_time, kind)",
-    )
+    .select("event_id, events!inner(id, title, event_date, start_time, kind)")
     .eq("team_id", teamId)
     .gte("events.event_date", first)
     .lte("events.event_date", last);
@@ -106,7 +99,6 @@ export default async function EscalarPage({
         .maybeSingle(),
     ]);
 
-  // disponibilidade
   const submitted = new Set<string>();
   const availByUserDate = new Map<string, boolean>();
   if (cycle) {
@@ -114,9 +106,7 @@ export default async function EscalarPage({
       .from("availability_responses")
       .select("id, user_id, submitted_at")
       .eq("cycle_id", cycle.id);
-    const respUser = new Map(
-      (responses ?? []).map((r) => [r.id, r.user_id]),
-    );
+    const respUser = new Map((responses ?? []).map((r) => [r.id, r.user_id]));
     for (const r of responses ?? [])
       if (r.submitted_at) submitted.add(r.user_id);
     const respIds = (responses ?? []).map((r) => r.id);
@@ -132,7 +122,6 @@ export default async function EscalarPage({
     }
   }
 
-  // conflitos no mesmo dia (qualquer equipe)
   const { data: monthBookings } = await supabase
     .from("assignments")
     .select("user_id, events!inner(event_date, title)")
@@ -142,24 +131,30 @@ export default async function EscalarPage({
   const bookedByUserDate = new Map<string, string[]>();
   for (const b of monthBookings ?? []) {
     if (!b.user_id || !b.events) continue;
-    const key = `${b.user_id}|${b.events.event_date}`;
-    const list = bookedByUserDate.get(key) ?? [];
+    const k = `${b.user_id}|${b.events.event_date}`;
+    const list = bookedByUserDate.get(k) ?? [];
     list.push(b.events.title);
-    bookedByUserDate.set(key, list);
+    bookedByUserDate.set(k, list);
   }
 
   const members = (memberRows ?? [])
     .map((m) => m.users)
     .filter((u): u is NonNullable<typeof u> => Boolean(u))
     .map((u) => ({ id: u.id, name: u.full_name }));
+  const memberName = new Map(members.map((m) => [m.id, m.name]));
 
   function availabilityFor(userId: string, date: string): Availability {
     if (!cycle || !submitted.has(userId)) return "unknown";
     const v = availByUserDate.get(`${userId}|${date}`);
     return v === undefined ? "unknown" : v ? "yes" : "no";
   }
-
   const rank = { yes: 0, unknown: 1, no: 2 } as const;
+
+  // só entram na lista quem respondeu a disponibilidade da equipe no mês
+  // (se não houver ciclo, mostra todo mundo com aviso)
+  const candidateBase = cycle
+    ? members.filter((m) => submitted.has(m.id))
+    : members;
 
   const events: BoardEvent[] = evList.map((e) => {
     const slots = (assignments ?? [])
@@ -169,11 +164,14 @@ export default async function EscalarPage({
         roleName: a.roles?.name ?? "Função",
         roleSort: a.roles?.sort_order ?? 0,
         currentUserId: a.user_id,
+        currentUserName: a.user_id
+          ? (memberName.get(a.user_id) ?? "—")
+          : null,
         status: a.status,
       }))
       .sort((x, y) => x.roleSort - y.roleSort);
 
-    const candidates = members
+    const candidates = candidateBase
       .map((m) => ({
         id: m.id,
         name: m.name,
@@ -207,6 +205,7 @@ export default async function EscalarPage({
       monthLabel={monthLabel(year, month)}
       events={events}
       cycleStatus={cycle?.status ?? null}
+      responderCount={submitted.size}
     />
   );
 }
